@@ -1,0 +1,12 @@
+{
+  "testuser_debug": {
+    "username": "testuser_debug",
+    "email": "test@example.com",
+    "password": "7e6e0c3079a08c5cc6036789b57e951f65f82383913ba1a49ae992544f1b4b6e"
+  },
+  "fxquadratics": {
+    "username": "fxquadratics",
+    "email": "fxquadratics@gmail.com",
+    "password": "90083645e443b302ecc110265f0cec4b47f30aa4a80ac5a9416ba9970f10d5b3"
+  }
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Account - ZachApp</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 24px;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+        .success-icon {
+            font-size: 48px;
+            color: #27ae60;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .button {
+            background-color: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .button:hover {
+            background-color: #229954;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #7f8c8d;
+            text-align: center;
+        }
+        .debug-info {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🚀 ZachApp</div>
+            <h1 class="title">Verify Your Account</h1>
+        </div>
+        
+        <div id="status" class="status info" style="display: none;"></div>
+        
+        <!-- Debug info (remove in production) -->
+        <div class="debug-info">
+            <strong>Debug Info:</strong><br>
+            Username: <span id="debugUsername">Loading...</span><br>
+            Token: <span id="debugToken">Loading...</span><br>
+            Full URL: <span id="debugUrl">Loading...</span>
+        </div>
+        
+        <div id="verificationForm">
+            <div class="success-icon">📧</div>
+            <p>Click the button below to verify your email address:</p>
+            <button class="button" onclick="verifyEmail()">Verify My Email</button>
+        </div>
+        
+        <div class="footer">
+            <p>This page is for verifying your ZachApp account.</p>
+            <p>If you didn't request this verification, please ignore this page.</p>
+            <p>© 2025 ZachApp Team. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        const token = urlParams.get('token');
+        
+        // Update debug info
+        document.getElementById('debugUsername').textContent = username || 'Not found';
+        document.getElementById('debugToken').textContent = token ? token.substring(0, 20) + '...' : 'Not found';
+        document.getElementById('debugUrl').textContent = window.location.href;
+        
+        // Check if we have the required parameters
+        if (!username || !token) {
+            showStatus('Invalid verification link. Please request a new verification email.', 'error');
+            document.getElementById('verificationForm').style.display = 'none';
+        } else {
+            showStatus(`Ready to verify email for user: ${username}`, 'info');
+        }
+        
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+        }
+        
+        function verifyEmail() {
+            const button = document.querySelector('.button');
+            button.disabled = true;
+            button.textContent = 'Verifying...';
+            
+            // For now, just show a success message
+            // In a real implementation, this would send the data to your backend
+            setTimeout(() => {
+                showStatus('Email verified successfully! Your account is now active.', 'success');
+                document.getElementById('verificationForm').style.display = 'none';
+                
+                // Show success icon and login link
+                const successDiv = document.createElement('div');
+                successDiv.innerHTML = `
+                    <div class="success-icon">✅</div>
+                    <p>Congratulations! Your email has been verified.</p>
+                    <p><a href="https://zachnashandi-beep.github.io/zachapp/" class="button">Login to Your Account</a></p>
+                `;
+                document.querySelector('.container').appendChild(successDiv);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
