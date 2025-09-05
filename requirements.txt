@@ -1,18 +1,12 @@
-# Python requirements for the login application
-# Install with: pip install -r requirements.txt
+# Flask web framework
+Flask==2.3.3
+Flask-CORS==4.0.0
 
-# MySQL database connector
-mysql-connector-python>=8.0.0
+# Database
+mysql-connector-python==8.1.0
 
-# PyQt6 for GUI (if not already installed)
-PyQt6>=6.0.0
+# Email
+# (Gmail SMTP is built into Python)
 
-# Additional dependencies that might be needed
-# (These are usually included with Python standard library)
-# json - built-in
-# os - built-in
-# time - built-in
-# hashlib - built-in
-# secrets - built-in
-# logging - built-in
-# getpass - built-in
+# Other dependencies
+python-dotenv==1.0.0
